@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const { ObjectId } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
@@ -41,15 +42,21 @@ async function run() {
       const item = await cursor.toArray();
       res.send(item);
     });
-
-    // get product by id
-    app.get('/product/:id', async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: ObjectId(id) };
-      const products = await productsCollection.findOne(query);
-      res.send(products);
-    });
-
+    // all products filter by  id
+    // app.get('/productId/:_id', async (req, res) => {
+    //   const productsCategory = req.params._id;
+    //   const query = { _id };
+    //   const cursor = productsCollection.find(query);
+    //   const item = await cursor.toArray();
+    //   res.send(item);
+    // });
+    // // get product by id
+    // app.get('/product/:id', async (req, res) => {
+    //   const id = req.params.id;
+    //   const query = { _id: ObjectId(id) };
+    //   const products = await productsCollection.findOne(query);
+    //   res.send(products);
+    // });
     // post all products
     app.post('/products', async (req, res) => {
       const newProducts = req.body;
