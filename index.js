@@ -33,6 +33,13 @@ async function run() {
       const product = await cursor.toArray();
       res.send(product);
     });
+
+    // post all products
+    app.post('/products', async (req, res) => {
+      const newProducts = req.body;
+      const result = await productsCollection.insertOne(newProducts);
+      res.send(result);
+    });
   } finally {
   }
 }
