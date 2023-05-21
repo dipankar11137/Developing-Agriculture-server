@@ -33,6 +33,14 @@ async function run() {
       const product = await cursor.toArray();
       res.send(product);
     });
+    // all products filter by  category
+    app.get('/product/:productsCategory', async (req, res) => {
+      const productsCategory = req.params.productsCategory;
+      const query = { productsCategory };
+      const cursor = productsCollection.find(query);
+      const item = await cursor.toArray();
+      res.send(item);
+    });
 
     // post all products
     app.post('/products', async (req, res) => {
