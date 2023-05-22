@@ -55,6 +55,13 @@ async function run() {
       const item = await cursor.toArray();
       res.send(item);
     });
+    // Delete one Products
+    app.delete('/products/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productsCollection.deleteOne(query);
+      res.send(result);
+    });
 
     // get all services by id
     app.get('/buy/:id', async (req, res) => {
