@@ -84,6 +84,14 @@ async function run() {
       const product = await cursor.toArray();
       res.send(product);
     });
+
+    // Delete one buy Products
+    app.delete('/bookProducts/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await buyProductsCollection.deleteOne(query);
+      res.send(result);
+    });
     // const jobCollection = client.db('dailyNeeds').collection('jobs');
     // const userCollection = client.db('dailyNeeds').collection('users');
     // const allServicesCollection = client
