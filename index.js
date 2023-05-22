@@ -77,6 +77,13 @@ async function run() {
       const result = await buyProductsCollection.insertOne(newProducts);
       res.send(result);
     });
+    // get all buy products
+    app.get('/bookProducts', async (req, res) => {
+      const query = {};
+      const cursor = buyProductsCollection.find(query);
+      const product = await cursor.toArray();
+      res.send(product);
+    });
     // const jobCollection = client.db('dailyNeeds').collection('jobs');
     // const userCollection = client.db('dailyNeeds').collection('users');
     // const allServicesCollection = client
